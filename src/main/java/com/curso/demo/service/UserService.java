@@ -21,6 +21,12 @@ public interface UserService {
 	 * @return lista de usuario
 	 */
 	ArrayList findAll();
+
+/**
+ * Elimina un usuario con el id recibido
+ * @param id
+ */
+	void deleteUser(Long id);
 	
 	
 }

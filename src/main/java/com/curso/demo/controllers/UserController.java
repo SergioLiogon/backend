@@ -58,14 +58,26 @@ public class UserController {
 	}	
     
     
-    @RequestMapping(value = "/getUsers", method = RequestMethod.GET)
+    @SuppressWarnings("unchecked")
+	@RequestMapping(value = "/getUsers", method = RequestMethod.GET)
     public ArrayList<User> getUsers(){
     	
     	return (ArrayList<User>) this.userService.findAll();
     }
     
 	
-	
+	@RequestMapping(value = "/deleteUser", method = RequestMethod.POST)
+    public void deleteUser(@RequestBody String userJson) throws Exception{
+		   this.mapper = new ObjectMapper();
+			
+			User user = this.mapper.readValue(userJson, User.class);
+    	
+			if(user.getId()== null){
+				throw new Exception("El id es nulo");
+			}
+			this.userService.deleteUser(user.getId());
+    }
+    
 	private boolean validate(User user){
 		
 		boolean isValied = true;
